@@ -5,7 +5,7 @@ import { useLogStore } from "../store.ts";
 const store = useLogStore();
 const props = defineProps<{
 	data: LogInterface;
-	keyProp: number;
+	id: number;
 }>();
 const tagsInput = ref<string>(stringifyTags(props.data.tags));
 const logTypeInput = ref<string>(props.data.logType);
@@ -15,7 +15,7 @@ const loginInputElement = ref<HTMLInputElement | null>(null);
 const passwordInputElement = ref<HTMLInputElement | null>(null);
 
 function rmLog() {
-	store.removeLog(props.keyProp);
+	store.removeLog(props.id);
 }
 function stringifyTags(arr: Tag[] | undefined) {
 	if (arr) {
@@ -54,6 +54,7 @@ function validate(): boolean {
 
 function setData() {
 	const tagToSet: LogInterface = {
+		id: props.id,
 		logType: logTypeInput.value,
 		login: loginInput.value,
 		password: logTypeInput.value === "local" ? passwordInput.value : null,
@@ -65,10 +66,8 @@ function setData() {
 		tagToSet.tags = undefined;
 	}
 	if (validate()) {
-		store.setData(props.keyProp, tagToSet);
+		store.setData(props.id, tagToSet);
 	}
-	console.log("saved:");
-	console.log(tagToSet);
 }
 </script>
 

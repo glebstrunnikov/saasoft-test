@@ -52,24 +52,11 @@ function addLog() {
 			</thead>
 			<tbody>
 				<TableRow
-					v-for="(log, index) in store.logs"
-					:key="index"
+					v-for="log in store.logs"
+					:key="log.id"
 					:data="log"
-					:keyProp="index"
+					:id="log.id"
 				></TableRow>
-				<!-- <tr>
-					<th>1asdasdsad</th>
-					<td>2</td>
-					<td>2</td>
-					<td>2</td>
-					<td>2</td>
-				</tr>
-				<tr>
-					<th>1</th>
-					<td colspan="2">2</td>
-					<td>2</td>
-					<td>2</td>
-				</tr> -->
 			</tbody>
 		</table>
 	</div>
@@ -89,4 +76,7 @@ function addLog() {
 </style>
 
 <!-- 
-1. переделать сохраниение тегов без пробела и с trim -->
+1. переделать сохраниение тегов без пробела и с trim
+2. сделать инпут тегов из двух строчек если длинно
+3. добавить комменты
+4. добавить красоты -->
