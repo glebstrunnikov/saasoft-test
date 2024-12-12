@@ -28,6 +28,7 @@ function stringifyTags(arr: Tag[] | undefined) {
 			result += tag.text;
 			result += "; ";
 		});
+		result = result.slice(0, -2);
 		return result;
 	}
 	return "";
@@ -52,7 +53,7 @@ function validate(): boolean {
 		result = false;
 	} else loginInputElement.value?.classList.remove("error");
 	if (logTypeInput.value === "local") {
-		if (!passwordInput.value || passwordInput.value.trim().length === 0) {
+		if (!passwordInput.value || passwordInput.value.length === 0) {
 			passwordInputElement.value?.classList.add("error");
 			result = false;
 		} else passwordInputElement.value?.classList.remove("error");
@@ -96,6 +97,7 @@ onMounted(() => {
 	<tr>
 		<td>
 			<textarea
+				class="form-control"
 				rows="1"
 				ref="tagsInputElement"
 				maxlength="50"
@@ -106,13 +108,18 @@ onMounted(() => {
 			/>
 		</td>
 		<td>
-			<select @change="setData" v-model="logTypeInput">
+			<select
+				class="form-control"
+				@change="setData"
+				v-model="logTypeInput"
+			>
 				<option value="local">Локальная</option>
 				<option value="ldap">LDAP</option>
 			</select>
 		</td>
 		<td :colspan="logTypeInput === 'local' ? 1 : 2">
 			<input
+				class="form-control"
 				@blur="setData"
 				ref="loginInputElement"
 				maxlength="100"
@@ -122,6 +129,7 @@ onMounted(() => {
 		</td>
 		<td v-if="logTypeInput === 'local'">
 			<input
+				class="form-control"
 				@blur="setData"
 				ref="passwordInputElement"
 				maxlength="100"
@@ -130,13 +138,19 @@ onMounted(() => {
 			/>
 		</td>
 		<td>
-			<img @click="rmLog" src="/src/assets/svg/trash.svg" alt="" />
+			<button @click="rmLog" type="button" class="btn btn-light">
+				<img src="/src/assets/svg/trash.svg" alt="" />
+			</button>
 		</td>
 	</tr>
 </template>
 <style scoped lang="sass">
-input
+input, textarea, select
 	width: 100%
+textarea
+	overflow: hidden
+	resize: vertical
+
 .error
 	border-color: red
 textarea

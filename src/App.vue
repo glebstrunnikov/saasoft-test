@@ -12,15 +12,11 @@ function addLog() {
 </script>
 
 <template>
-	<div class="main-container container">
-		<div class="page-title">
+	<div class="main-container mt-3 container">
+		<div class="page-title mv-y">
 			<h1>Учетные записи</h1>
 			<div class="add-btn">
-				<button
-					@click="addLog"
-					type="button"
-					class="btn btn-outline-dark"
-				>
+				<button @click="addLog" type="button" class="mx-3 btn btn-dark">
 					<img
 						class="btn-icon"
 						src="/src/assets/svg/plus.svg"
@@ -29,17 +25,17 @@ function addLog() {
 				</button>
 			</div>
 		</div>
-		<div class="page-footnote">
+		<div class="page-footnote my-3">
 			<img
 				src="/src/assets/svg/question.svg"
 				alt=""
-				class="footnote-icon"
+				class="m-1 footnote-icon"
 			/><span class="footnote-text"
 				>Для указания нескольких меток для одной пары логин/пароль
 				используйте разделитель ;</span
 			>
 		</div>
-		<table class="table">
+		<table class="table my-3">
 			<thead>
 				<tr>
 					<th style="width: 25%" scope="col">Метки</th>
