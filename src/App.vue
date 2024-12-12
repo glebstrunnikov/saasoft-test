@@ -7,6 +7,9 @@ onMounted(() => {
 	store.loadData();
 	console.log(store.logs);
 });
+function addLog() {
+	store.addLog();
+}
 </script>
 
 <template>
@@ -14,7 +17,11 @@ onMounted(() => {
 		<div class="page-title">
 			<h1>Учетные записи</h1>
 			<div class="add-btn">
-				<button type="button" class="btn btn-outline-dark">
+				<button
+					@click="addLog"
+					type="button"
+					class="btn btn-outline-dark"
+				>
 					<img
 						class="btn-icon"
 						src="/src/assets/svg/plus.svg"
@@ -80,3 +87,6 @@ onMounted(() => {
 .page-footnote
   background-color: #eff4fa
 </style>
+
+<!-- 
+1. переделать сохраниение тегов без пробела и с trim -->

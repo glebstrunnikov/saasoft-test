@@ -4,7 +4,12 @@ import { ref } from "vue";
 import dummy from "./dummyData.json";
 export const useLogStore = defineStore("logs", () => {
 	const logs = ref<LogInterface[]>([]);
-	function addLog(log: LogInterface) {
+	function addLog() {
+		const log: LogInterface = {
+			logType: "local",
+			login: "",
+			password: "",
+		};
 		logs.value.push(log);
 	}
 	function removeLog(logNumber: number) {
@@ -25,11 +30,15 @@ export const useLogStore = defineStore("logs", () => {
 			localStorage.setItem("logs", JSON.stringify(logs.value));
 		}
 	}
+	function setData(logNumber: number, logData: LogInterface) {
+		logs.value[logNumber] = logData;
+	}
 	return {
 		logs,
 		addLog,
 		removeLog,
 		loadData,
 		saveData,
+		setData,
 	};
 });
