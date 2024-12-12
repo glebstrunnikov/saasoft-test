@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { LogInterface, Tag } from "../types.ts";
 import { useLogStore } from "../store.ts";
 const store = useLogStore();
@@ -7,10 +7,13 @@ const props = defineProps<{
 	data: LogInterface;
 	id: number;
 }>();
+
+// 4 рефа отвечают за значения полей, еще три - за элементы темплейта, чтобы окрашивать край в красный при непрохождении валидации и для ресайза поля с тегами
 const tagsInput = ref<string>(stringifyTags(props.data.tags));
 const logTypeInput = ref<string>(props.data.logType);
 const loginInput = ref<string>(props.data.login);
 const passwordInput = ref<string | null>(props.data.password);
+const tagsInputElement = ref<HTMLInputElement | null>(null);
 const loginInputElement = ref<HTMLInputElement | null>(null);
 const passwordInputElement = ref<HTMLInputElement | null>(null);
 
@@ -71,18 +74,33 @@ function setData() {
 	} else {
 		tagToSet.tags = undefined;
 	}
+	tagsResize();
 	if (validate()) {
 		store.setData(props.id, tagToSet);
 	}
 }
+function tagsResize() {
+	// Хотя в задании это не написано напрямую, судя по картинке, высота поля для ввода тегов должна быть переменной и зависеть от их количества. Поэтому я сделал для тегов textarea и добавил простую логику изменения высоты при загрузке/изменении/сохранении
+	if (tagsInputElement.value) {
+		tagsInputElement.value.style.height = "auto";
+		tagsInputElement.value.style.height = `${tagsInputElement.value?.scrollHeight}px`;
+	}
+}
+
+onMounted(() => {
+	tagsResize();
+});
 </script>
 
 <template>
 	<tr>
 		<td>
-			<input
+			<textarea
+				rows="1"
+				ref="tagsInputElement"
 				maxlength="50"
 				@blur="setData"
+				@input="tagsResize"
 				type="text"
 				v-model="tagsInput"
 			/>
@@ -121,4 +139,6 @@ input
 	width: 100%
 .error
 	border-color: red
+textarea
+	resize: auto
 </style>
