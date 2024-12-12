@@ -1,0 +1,20 @@
+[
+	{
+		"tags": [{ "text": "AAA" }, { "text": "bbb" }],
+		"logType": "local",
+		"login": "john",
+		"password": "123"
+	},
+	{
+		"tags": [{ "text": "bbb" }],
+		"logType": "local",
+		"login": "anna",
+		"password": "qwe"
+	},
+	{
+		"tags": [{ "text": "bbb" }],
+		"logType": "ldap",
+		"login": "bob",
+		"password": null
+	}
+]
