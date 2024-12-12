@@ -1,5 +1,1 @@
-# Vue 3 + TypeScript + Vite
-
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
-
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+Приложение сделано на vite, types.ts и store.ts - прямо в корневом каталоге. Есть один основной компонент App и еще один - TableRow. В App - большая часть интерфейса, там из стора загружается массив logs, дальше мы проходим по всему массиву и рендерим отдельные строчки таблицы как TableRow, передавая данные из элементов массива как props. Вся логика ввода/вывода значений и валидация находится в TableRow; при изменени значения элемента (если пройдена валидация) он обращается к стору, в котором происходит вся работа с данными.

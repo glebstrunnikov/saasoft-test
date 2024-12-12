@@ -5,7 +5,6 @@ import TableRow from "./components/TableRow.vue";
 const store = useLogStore();
 onMounted(() => {
 	store.loadData();
-	console.log(store.logs);
 });
 function addLog() {
 	store.addLog();

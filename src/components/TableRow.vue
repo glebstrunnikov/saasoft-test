@@ -18,6 +18,7 @@ function rmLog() {
 	store.removeLog(props.id);
 }
 function stringifyTags(arr: Tag[] | undefined) {
+	// Превращает тэги из массива, описанного в задании, в строку
 	if (arr) {
 		let result: string = "";
 		arr.forEach((tag: Tag) => {
@@ -29,15 +30,19 @@ function stringifyTags(arr: Tag[] | undefined) {
 	return "";
 }
 function parseTags(str: string): Tag[] | null {
-	const tagsArr = str.split("; ");
+	// Превращает тэги из строки в массив описанный в задании
+	const tagsArr = str.split(";").filter((tagText: string) => {
+		return tagText.trim().length > 0;
+	});
 	if (tagsArr.length > 0) {
 		return tagsArr.map((tag) => {
-			return { text: tag };
+			return { text: tag.trim() };
 		});
 	} else return null;
 }
 
 function validate(): boolean {
+	// Валидирует наличие строки длиннее 0 и не состоящей из одних пробелов в обязательных полях. Ограничение максимальной длины реализовано просто, через maxlength элементов
 	let result: boolean = true;
 	if (!loginInput.value || loginInput.value.trim().length === 0) {
 		loginInputElement.value?.classList.add("error");
@@ -53,6 +58,7 @@ function validate(): boolean {
 }
 
 function setData() {
+	// Сохраняет данные, если пройдена валидация
 	const tagToSet: LogInterface = {
 		id: props.id,
 		logType: logTypeInput.value,
